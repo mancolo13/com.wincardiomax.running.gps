@@ -1,78 +1,44 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_theme.dart';
-import '../../services/routing_service.dart';
 
-class Tab2Screen extends StatefulWidget {
+
+class Tab2Screen extends StatelessWidget {
   const Tab2Screen({super.key});
 
   @override
-  State<Tab2Screen> createState() => _Tab2ScreenState();
-}
-
-class _Tab2ScreenState extends State<Tab2Screen> {
-  int _idx = 0;
-
-  @override
   Widget build(BuildContext context) {
+    final splits = [
+      {'km': '1 km', 'pace': '5\'04\"', 'elev': '+8m'},
+      {'km': '2 km', 'pace': '4\'58\"', 'elev': '+12m'},
+      {'km': '3 km', 'pace': '4\'52\"', 'elev': '-4m'},
+      {'km': '4 km', 'pace': '4\'49\"', 'elev': '+2m'},
+      {'km': '5 km', 'pace': '4\'54\"', 'elev': '+6m'},
+      {'km': '6 km', 'pace': '4\'59\"', 'elev': '+10m'},
+    ];
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Win • Pace'),
-      ),
-      body: ListView(
+      appBar: AppBar(title: const Text('Win • Kilometer Splits')),
+      body: ListView.builder(
         padding: const EdgeInsets.all(16),
-        children: [
-          SegmentedButton<int>(
-            segments: const [
-              ButtonSegment(value: 0, label: Text('Overview')),
-              ButtonSegment(value: 1, label: Text('Details')),
-              ButtonSegment(value: 2, label: Text('History')),
-            ],
-            selected: {_idx},
-            onSelectionChanged: (s) => setState(() => _idx = s.first),
-          ),
-          const SizedBox(height: 20),
-          ...List.generate(5, (i) => Card(
-            color: AppTheme.surfaceColor,
-            margin: const EdgeInsets.only(bottom: 12),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Pace Item #${i + 101}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: AppTheme.primaryColor.withValues(alpha: 0.2),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text('READY', style: TextStyle(color: AppTheme.primaryColor, fontSize: 11, fontWeight: FontWeight.bold)),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Text('Comprehensive telemetry data and analytical performance metrics for item #${i + 1}.', style: const TextStyle(color: Colors.white70, fontSize: 13)),
-                  const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton.icon(
-                        icon: const Icon(Icons.bolt, size: 16),
-                        label: const Text('Execute'),
-                        onPressed: () => RoutingService.openRegistrationUrl(),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+        itemCount: splits.length,
+        itemBuilder: (context, i) {
+          final s = splits[i];
+          return Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            decoration: BoxDecoration(color: AppTheme.surfaceColor, borderRadius: BorderRadius.circular(14)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(s['km']!, style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text('Pace: ${s['pace']}', style: const TextStyle(color: AppTheme.primaryColor, fontWeight: FontWeight.bold)),
+                Text('Elev: ${s['elev']}', style: const TextStyle(color: Colors.white60)),
+              ],
             ),
-          )),
-        ],
+          );
+        },
       ),
     );
   }
 }
+

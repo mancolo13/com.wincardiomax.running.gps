@@ -32,27 +32,26 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: AppTheme.surfaceColor,
         indicatorColor: AppTheme.primaryColor.withValues(alpha: 0.2),
         destinations: [
-        NavigationDestination(
-          icon: const Icon(Icons.directions_run_outlined),
-          selectedIcon: const Icon(Icons.directions_run, color: AppTheme.primaryColor),
-          label: 'Run',
-        ),
-        NavigationDestination(
-          icon: const Icon(Icons.speed_outlined),
-          selectedIcon: const Icon(Icons.speed, color: AppTheme.primaryColor),
-          label: 'Pace',
-        ),
-        NavigationDestination(
-          icon: const Icon(Icons.timer_outlined),
-          selectedIcon: const Icon(Icons.timer, color: AppTheme.primaryColor),
-          label: 'Splits',
-        ),
-        NavigationDestination(
-          icon: const Icon(Icons.timeline_outlined),
-          selectedIcon: const Icon(Icons.timeline, color: AppTheme.primaryColor),
-          label: 'History',
-        ),
-
+          NavigationDestination(
+            icon: const Icon(Icons.directions_run_outlined),
+            selectedIcon: const Icon(Icons.directions_run, color: AppTheme.primaryColor),
+            label: 'Run',
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.timeline_outlined),
+            selectedIcon: const Icon(Icons.timeline, color: AppTheme.primaryColor),
+            label: 'Splits',
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.flag_outlined),
+            selectedIcon: const Icon(Icons.flag, color: AppTheme.primaryColor),
+            label: 'Plans',
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.workspace_premium_outlined),
+            selectedIcon: const Icon(Icons.workspace_premium, color: AppTheme.primaryColor),
+            label: 'Gear',
+          ),
         ],
       ),
     );
